@@ -1,0 +1,79 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t, lpath, type Lang } from '../../lib/site';
+
+const lang: Lang = 'am';
+const d = t(lang);
+const title = `${d.nav.about} | ${d.churchName}`;
+const description = 'ስለ ኢትዮጵያ ወንጌላዊት ቤተ ክርስቲያን በቶሮንቶ — ተልዕኮአችን፣ የእምነት መግለጫችን እና አገልጋዮቻችን።';
+---
+<Base lang={lang} title={title} description={description} current="about">
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href={lpath(lang, '/')}>{d.nav.home}</a> / {d.nav.about}</div>
+      <h1>{d.nav.about}</h1>
+      <p>{description}</p>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="wrap">
+      <span class="eyebrow">ተልዕኮአችን</span>
+      <div class="prose">
+        <blockquote>
+          የኢየሱስ ክርስቶስን ወንጌል ለጠፉ ነፍሳት ስብኩ እና በቃሉ ሕይወትን በመለወጥ ለንግሥተ ሰማያት ኑሩ።
+        </blockquote>
+        <p>
+          የኢትዮጵያ ወንጌላዊት ቤተ ክርስቲያን በቶሮንቶ የኢትዮጵያ ልብ ያላት እና በቶሮንቶ መኖሪያ ያላት የአማኞች ማኅበር ናት።
+          ለአሥርተ ዓመታት በአማርኛ እና በእንግሊዝኛ ለማምለክ፣ ቤተሰቦቻችንን በእምነት ለማሳደግ እና ከተማችንን በክርስቶስ ፍቅር
+          ለማገልገል ተሰብስበናል።
+        </p>
+      </div>
+
+      <span class="eyebrow" style="margin-top:3rem">የእምነት መግለጫ</span>
+      <div class="prose">
+        <ul>
+          <li>መጽሐፍ ቅዱስ — ብሉይና አዲስ ኪዳን — የእግዚአብሔር እርፍ መንፈስ ያለበት፣ የማይሳሳት እና ሥልጣናዊ ቃል እንደሆነ፣ ለእምነትና ለሕይወት ብቸኛ መመሪያችን እንደሆነ እናምናለን።</li>
+          <li>በአንድ ዘላለማዊ እግዚአብሔር — አብ፣ ወልድ እና መንፈስ ቅዱስ በሦስት አካላት — እናምናለን።</li>
+          <li>በኢየሱስ ክርስቶስ መለኮት — ከድንግል መወለዱ፣ ከኃጢአት በነጻ ሕይወቱ፣ ከዋጋ ቤዛ ሞቱ፣ ከሥጋዊ ትንሣኤው፣ ከዕርገቱ እና ከተስፋ ቃል ኪዳኑ መምጣት እናምናለን።</li>
+          <li>ድኅነት በጸጋ በእምነት በኢየሱስ ክርስቶስ ብቻ እንደሆነ፣ ንስሐ የገቡ እና ያመኑ ሁሉ ወደ አዲስ ሕይወት እንደሚወለዱ እናምናለን።</li>
+          <li>በመንፈስ ቅዱስ የአሁን አገልግሎት — የሚወቅስ፣ እንደገና የሚወልድ፣ የሚያድር እና አማኞችን ለቅድስት ሕይወት እና ምስክርነት ኃይል የሚሰጥ — እናምናለን።</li>
+          <li>በውኃ ጥምቀት እና በጌታ እራት እንደ የቤተ ክርስቲያን ሥርዓቶች እናምናለን።</li>
+          <li>በሙታን ትንሣኤ — አማኙ ወደ ዘላለማዊ ሕይወት፣ የማያምን ወደ ዘላለማዊ ከእግዚአብሔር መለያየት — እናምናለን።</li>
+        </ul>
+      </div>
+
+      <span class="eyebrow" style="margin-top:3rem">አገልጋዮች</span>
+      <div class="staff-grid">
+        <div class="staff-card">
+          <div class="body">
+            <h3>Pastor Tesfaye Moges</h3>
+            <div class="role">ዋና አገልጋይ</div>
+            <p>ማኅበሩን በአምልኮ፣ በትምህርት እና በነፍስ እንክብካቤ ይመራል።</p>
+          </div>
+        </div>
+        <div class="staff-card">
+          <div class="body">
+            <h3>Pastor Birhanu Mekonnen</h3>
+            <div class="role">ወንጌላዊ</div>
+            <p>ወንጌልን እና የማህበረሰብ አገልግሎትን ይመራል።</p>
+          </div>
+        </div>
+        <div class="staff-card">
+          <div class="body">
+            <h3>Pastor Dereje Alemayehu</h3>
+            <div class="role">የወጣቶች አገልግሎት</div>
+            <p>የቤተ ክርስቲያኑን ወጣቶች በእምነት እና በህብረት ይጠብቃል።</p>
+          </div>
+        </div>
+        <div class="staff-card">
+          <div class="body">
+            <h3>Pastor Tesfaye Tesfaye</h3>
+            <div class="role">የቤተሰብ አገልግሎት · የሽማግሌዎች ቦርድ</div>
+            <p>ቤተሰቦችን ያገለግላል እና ከሽማግሌዎች ጋር መንፈሳዊ ክትትል ይሰጣል።</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

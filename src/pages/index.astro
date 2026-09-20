@@ -1,50 +1,128 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
----
+import Base from '../layouts/Base.astro';
+import ServiceTimes from '../components/ServiceTimes.astro';
+import { t, lpath, type Lang } from '../lib/site';
+import { getCollection } from 'astro:content';
+import sermons from '../data/sermons.json';
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+const lang: Lang = 'en';
+const d = t(lang);
+const title = `${d.churchName} | ${d.tagline}`;
+const description =
+  'The Ethiopian Evangelical Church in Toronto — worship in Amharic and English, weekly devotions, sermons, and ministries. Sundays at 2275 Markham Rd, Scarborough.';
+
+// Latest devotion in this language + 3 recent sermons for the homepage
+const devotions = (await getCollection('devotions', (d) => d.data.lang === lang)).sort((a, b) =>
+  b.data.date.localeCompare(a.data.date)
+);
+const latest = devotions[0];
+const recentSermons = sermons.slice(0, 3);
+---
+<Base lang={lang} title={title} description={description} current="home">
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow" style="color: var(--gold)">{d.hero.eyebrow}</span>
+      <h1>{d.hero.title}</h1>
+      <p class="sub">{d.hero.sub}</p>
+      <div class="btn-row">
+        <a class="btn btn-gold" href={lpath(lang, '/im-new')}>{d.hero.planVisit}</a>
+        <a class="btn btn-outline" style="color:#f0e6cf;border-color:var(--gold)" href={lpath(lang, '/giving')}>{d.hero.give}</a>
+      </div>
+      <div class="hero-badges">
+        <span class="hero-badge">{d.hero.badge1}</span>
+        <span class="hero-badge">{d.hero.badge2}</span>
+        <span class="hero-badge">{d.hero.badge3}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="wrap">
+      <span class="eyebrow">{d.home.timesEyebrow}</span>
+      <h2>{d.home.timesTitle}</h2>
+      <p class="lead">{d.home.timesSub}</p>
+      <ServiceTimes lang={lang} />
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="wrap">
+      <span class="eyebrow">{d.home.aboutEyebrow}</span>
+      <h2>{d.home.aboutTitle}</h2>
+      <p class="lead">{d.home.aboutText}</p>
+      <div class="btn-row">
+        <a class="btn btn-dark" href={lpath(lang, '/about')}>{d.home.aboutCta}</a>
+      </div>
+    </div>
+  </section>
+
+  {latest && (
+    <section class="section tight">
+      <div class="wrap">
+        <span class="eyebrow">{d.home.devotionsEyebrow}</span>
+        <h2>{d.home.devotionsTitle}</h2>
+        <div class="devotion-item">
+          <div class="meta">{latest.data.date} · {latest.data.category}</div>
+          <h3><a href={lpath(lang, `/devotions/${latest.slug}`)}>{latest.data.title}</a></h3>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-outline" href={lpath(lang, '/devotions')}>{d.home.devotionsCta}</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {recentSermons.length > 0 && (
+    <section class="section tight">
+      <div class="wrap">
+        <span class="eyebrow">{d.home.sermonsEyebrow}</span>
+        <h2>{d.home.sermonsTitle}</h2>
+        {recentSermons.map((s) => (
+          <div class="sermon">
+            <a class="sermon-thumb" href={`https://www.youtube.com/watch?v=${s.youtubeId}`} target="_blank" rel="noopener">
+              <img src={`https://i.ytimg.com/vi/${s.youtubeId}/hqdefault.jpg`} alt="" loading="lazy" />
+            </a>
+            <div>
+              <div class="meta">{s.date}</div>
+              <h3><a href={`https://www.youtube.com/watch?v=${s.youtubeId}`} target="_blank" rel="noopener">{s.title}</a></h3>
+            </div>
+          </div>
+        ))}
+        <div class="btn-row">
+          <a class="btn btn-outline" href={lpath(lang, '/sermons')}>{d.home.sermonsCta}</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section tight">
+    <div class="wrap">
+      <div class="card" style="text-align:center; padding: 3rem 2rem;">
+        <span class="eyebrow">{d.home.giveEyebrow}</span>
+        <h2>{d.home.giveTitle}</h2>
+        <p class="lead" style="margin: 0 auto;">{d.home.giveText}</p>
+        <div class="btn-row" style="justify-content:center">
+          <a class="btn btn-gold" href={lpath(lang, '/giving')}>{d.home.giveCta}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="wrap">
+      <span class="eyebrow">{d.home.visitEyebrow}</span>
+      <h2>{d.home.visitTitle}</h2>
+      <p class="lead">{d.footer.address}</p>
+      <div class="map-wrap">
+        <iframe
+          title="Map — Ethiopian Evangelical Church in Toronto"
+          src="https://www.google.com/maps?q=2275+Markham+Rd,+Scarborough,+ON+M1B+2W3&output=embed"
+          loading="lazy"
+        ></iframe>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-dark" href={lpath(lang, '/im-new')}>{d.home.visitCta}</a>
+      </div>
+    </div>
+  </section>
+</Base>

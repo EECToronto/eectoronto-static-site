@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import BreezeForm from '../../components/BreezeForm.astro';
+import { t, lpath, type Lang } from '../../lib/site';
+
+const lang: Lang = 'am';
+const d = t(lang);
+const title = `${d.contact.title} | ${d.churchName}`;
+---
+<Base lang={lang} title={title} description={d.contact.sub} current="contact">
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href={lpath(lang, '/')}>{d.nav.home}</a> / {d.contact.title}</div>
+      <h1>{d.contact.title}</h1>
+      <p>{d.contact.sub}</p>
+    </div>
+  </section>
+  <section class="section tight">
+    <div class="wrap">
+      <div class="card-grid" style="margin-top:0">
+        <div class="card">
+          <h3>{d.footer.visit}</h3>
+          <p>{d.footer.address}<br />{d.footer.phone}</p>
+        </div>
+        <div class="card">
+          <h3>{d.home.timesTitle}</h3>
+          <p>{d.hero.badge1}<br />{d.hero.badge2}</p>
+        </div>
+      </div>
+      <BreezeForm form="Contactus" />
+      <div class="map-wrap">
+        <iframe
+          title="Map — Ethiopian Evangelical Church in Toronto"
+          src="https://www.google.com/maps?q=2275+Markham+Rd,+Scarborough,+ON+M1B+2W3&output=embed"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+</Base>

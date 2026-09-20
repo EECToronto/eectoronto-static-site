@@ -1,0 +1,19 @@
+---
+/** Breeze ChMS embedded form (contact / registration / bible study). */
+interface Props {
+  form: 'Contactus' | 'reg' | 'biblestudy';
+  height?: number;
+}
+const { form, height = 800 } = Astro.props;
+---
+<div class="breeze-wrap">
+  <div
+    class="breeze_form_embed"
+    data-subdomain="eectoronto"
+    data-address={form}
+    data-width="100%"
+    data-height={String(height)}
+  >
+    <script type="text/javascript" src="https://app.breezechms.com/js/form_embed.js"></script>
+  </div>
+</div>

@@ -1,62 +1,80 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import Base from '../layouts/Base.astro';
+import { t, lpath, type Lang } from '../lib/site';
+
+const lang: Lang = 'en';
+const d = t(lang);
+const title = `${d.nav.about} | ${d.churchName}`;
+const description = 'About the Ethiopian Evangelical Church in Toronto — our mission, statement of faith, and pastoral staff.';
 ---
+<Base lang={lang} title={title} description={description} current="about">
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href={lpath(lang, '/')}>{d.nav.home}</a> / {d.nav.about}</div>
+      <h1>{d.nav.about}</h1>
+      <p>{description}</p>
+    </div>
+  </section>
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage="/blog-placeholder-about.jpg"
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+  <section class="section tight">
+    <div class="wrap">
+      <span class="eyebrow">Our mission</span>
+      <div class="prose">
+        <blockquote>
+          Preach the Gospel of Jesus Christ to the lost souls around us and live for His Kingdom
+          by transforming lives through His Word.
+        </blockquote>
+        <p>
+          The Ethiopian Evangelical Church in Toronto is a congregation of believers with an
+          Ethiopian heart and a Toronto home. For decades we have gathered to worship in Amharic
+          and English, to raise our families in faith, and to serve our city with the love of Christ.
+        </p>
+      </div>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+      <span class="eyebrow" style="margin-top:3rem">Statement of faith</span>
+      <div class="prose">
+        <ul>
+          <li>We believe the Bible — the Old and New Testaments — is the inspired, infallible, and authoritative Word of God, our sole rule for faith and life.</li>
+          <li>We believe in one eternal God, existing in three persons: Father, Son, and Holy Spirit.</li>
+          <li>We believe in the deity of Jesus Christ — His virgin birth, sinless life, sacrificial death, bodily resurrection, ascension, and His promised return.</li>
+          <li>We believe salvation is by grace through faith in Jesus Christ alone, and that all who repent and believe are born again into new life.</li>
+          <li>We believe in the present ministry of the Holy Spirit, who convicts, regenerates, indwells, and empowers believers for godly living and witness.</li>
+          <li>We believe in baptism by immersion and the Lord's Supper as ordinances of the church.</li>
+          <li>We believe in the resurrection of the dead — the believer to everlasting life and the unbeliever to everlasting separation from God.</li>
+        </ul>
+      </div>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
-
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
-
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+      <span class="eyebrow" style="margin-top:3rem">Pastoral staff</span>
+      <div class="staff-grid">
+        <div class="staff-card">
+          <div class="body">
+            <h3>Pastor Tesfaye Moges</h3>
+            <div class="role">Senior Pastor</div>
+            <p>Leading the congregation in worship, teaching, and pastoral care.</p>
+          </div>
+        </div>
+        <div class="staff-card">
+          <div class="body">
+            <h3>Pastor Birhanu Mekonnen</h3>
+            <div class="role">Evangelist</div>
+            <p>Leading evangelism and outreach to our community.</p>
+          </div>
+        </div>
+        <div class="staff-card">
+          <div class="body">
+            <h3>Pastor Dereje Alemayehu</h3>
+            <div class="role">Youth Ministry</div>
+            <p>Shepherding the youth of the church in faith and fellowship.</p>
+          </div>
+        </div>
+        <div class="staff-card">
+          <div class="body">
+            <h3>Pastor Tesfaye Tesfaye</h3>
+            <div class="role">Family Ministry · Board of Elders</div>
+            <p>Serving families and providing spiritual oversight with the elders.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

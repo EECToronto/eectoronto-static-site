@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t, lpath, type Lang } from '../../lib/site';
+
+const lang: Lang = 'am';
+const d = t(lang);
+const title = `${d.nav.ministries} | ${d.churchName}`;
+const description = 'የኢትዮጵያ ወንጌላዊት ቤተ ክርስቲያን በቶሮንቶ አገልግሎቶች — ሕፃናት፣ ወጣቶች፣ ሴቶች፣ ወንዶች፣ ዝማሬ፣ ወንጌል እና ጸሎት።';
+
+const ministries = [
+  { name: 'የሕፃናት አገልግሎት', text: 'ትንንሽ ልጆቻችንን በእሁድ ክፍሎች እና እንቅስቃሴዎች የእግዚአብሔርን እውቀት እና ፍቅር እናሳድጋለን።' },
+  { name: 'የወጣቶች አገልግሎት', text: 'ታዳጊዎች እና ወጣቶች በእምነት፣ በጓደኝነት እና በዓላማ ያድጋሉ — በአገልጋይ ደረጀ አለማየሁ ይመራል።' },
+  { name: 'የሴቶች አገልግሎት', text: 'ለቤተ ክርስቲያኑ ሴቶች ህብረት፣ ማበረታቻ እና መንፈሳዊ እድገት።' },
+  { name: 'የወንዶች አገልግሎት', text: 'በህብረት፣ በተጠያቂነት እና በአገልግሎት የእምነት ወንዶችን መገንባት።' },
+  { name: 'ዝማሬ እና አምልኮ', text: 'በየሳምንቱ ማኅበሩን በልብ በሚነካ የአማርኛ እና የእንግሊዝኛ አምልኮ ይመራል።' },
+  { name: 'ወንጌል እና የማህበረሰብ አገልግሎት', text: 'ወንጌልን በከተማችን እና ከዚያ በላይ ማካፈል — በአገልጋይ ብርሃኑ መኮንን ይመራል።' },
+  { name: 'የጸሎት አገልግሎት', text: 'በሳምንታዊ የማኅበር ጸሎት እና ምልጃ መሃል መቆም።' },
+  { name: 'የቤተሰብ አገልግሎት', text: 'ጋብቻዎችን እና ቤተሰቦችን ማጠናከር — በአገልጋይ ተስፋዬ ተስፋዬ ከሽማግሌዎች ቦርድ ጋር ይመራል።' },
+];
+---
+<Base lang={lang} title={title} description={description} current="ministries">
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href={lpath(lang, '/')}>{d.nav.home}</a> / {d.nav.ministries}</div>
+      <h1>{d.nav.ministries}</h1>
+      <p>{description}</p>
+    </div>
+  </section>
+  <section class="section tight">
+    <div class="wrap">
+      <div class="card-grid">
+        {ministries.map((m) => (
+          <div class="card">
+            <h3>{m.name}</h3>
+            <p>{m.text}</p>
+          </div>
+        ))}
+      </div>
+      <div class="note" style="margin-top:2.5rem">
+        በእነዚህ አገልግሎቶች ውስጥ ማገልገል ይፈልጋሉ? <a href={lpath(lang, '/contact')}>የቤተ ክርስቲያኑን ቢሮ ያግኙ</a> እና እናገናኝዎታለን።
+      </div>
+    </div>
+  </section>
+</Base>

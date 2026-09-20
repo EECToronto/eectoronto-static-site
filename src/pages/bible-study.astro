@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import BreezeForm from '../components/BreezeForm.astro';
+import { t, lpath, type Lang } from '../lib/site';
+
+const lang: Lang = 'en';
+const d = t(lang);
+const title = `${d.bibleStudy.title} | ${d.churchName}`;
+---
+<Base lang={lang} title={title} description={d.bibleStudy.sub} current="bibleStudy">
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href={lpath(lang, '/')}>{d.nav.home}</a> / {d.bibleStudy.title}</div>
+      <h1>{d.bibleStudy.title}</h1>
+      <p>{d.bibleStudy.sub}</p>
+    </div>
+  </section>
+  <section class="section tight">
+    <div class="wrap">
+      <BreezeForm form="biblestudy" />
+    </div>
+  </section>
+</Base>

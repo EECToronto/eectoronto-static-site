@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import { t, lpath, type Lang } from '../lib/site';
+import sermons from '../data/sermons.json';
+
+const lang: Lang = 'en';
+const d = t(lang);
+const title = `${d.nav.sermons} | ${d.churchName}`;
+const description = 'Watch sermons from the Ethiopian Evangelical Church in Toronto.';
+const [featured, ...rest] = sermons;
+---
+<Base lang={lang} title={title} description={description} current="sermons">
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href={lpath(lang, '/')}>{d.nav.home}</a> / {d.nav.sermons}</div>
+      <h1>{d.nav.sermons}</h1>
+      <p>{description}</p>
+    </div>
+  </section>
+  <section class="section tight">
+    <div class="wrap">
+      {featured && (
+        <>
+          <div class="video-wrap">
+            <iframe
+              src={`https://www.youtube.com/embed/${featured.youtubeId}`}
+              title={featured.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <h2 style="margin-top:0">{featured.title}</h2>
+          <p class="meta" style="color:var(--muted);font-weight:600">{featured.date}</p>
+        </>
+      )}
+      <div style="margin-top:2.5rem">
+        {rest.map((s) => (
+          <div class="sermon">
+            <a class="sermon-thumb" href={`https://www.youtube.com/watch?v=${s.youtubeId}`} target="_blank" rel="noopener">
+              <img src={`https://i.ytimg.com/vi/${s.youtubeId}/hqdefault.jpg`} alt="" loading="lazy" />
+            </a>
+            <div>
+              <div class="meta" style="font-size:0.85rem;color:var(--muted);font-weight:600">{s.date}</div>
+              <h3><a href={`https://www.youtube.com/watch?v=${s.youtubeId}`} target="_blank" rel="noopener">{s.title}</a></h3>
+              <a class="btn btn-outline" style="margin-top:0.5rem;font-size:0.9rem;padding:0.5rem 1.1rem" href={`https://www.youtube.com/watch?v=${s.youtubeId}`} target="_blank" rel="noopener">{d.misc.watchSermon}</a>
+            </div>
+          </div>
+        ))}
+      </div>
+      {sermons.length === 0 && <p class="lead">Sermons are on the way — check back soon.</p>}
+    </div>
+  </section>
+</Base>

@@ -1,6 +1,6 @@
 {
-	"name": "astro-blog-starter-template",
-	"description": "Build a personal website, blog, or portfolio with Astro.",
+	"name": "eec-toronto",
+	"description": "Ethiopian Evangelical Church in Toronto — bilingual (EN/AM) website on Cloudflare Workers.",
 	"cloudflare": {
 		"label": "Astro Framework Starter",
 		"products": [

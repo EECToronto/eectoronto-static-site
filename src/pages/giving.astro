@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import { t, lpath, PAYPAL_DONATE_URL, type Lang } from '../lib/site';
+
+const lang: Lang = 'en';
+const d = t(lang);
+const title = `${d.giving.title} | ${d.churchName}`;
+const description = 'Give to the Ethiopian Evangelical Church in Toronto — tithes, building fund, and mission fund. Secure online giving via PayPal.';
+
+const funds = [
+  { key: 'tithes', title: d.giving.tithes, text: d.giving.tithesText },
+  { key: 'building', title: d.giving.building, text: d.giving.buildingText },
+  { key: 'mission', title: d.giving.mission, text: d.giving.missionText },
+];
+---
+<Base lang={lang} title={title} description={description} current="giving">
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href={lpath(lang, '/')}>{d.nav.home}</a> / {d.giving.title}</div>
+      <h1>{d.giving.title}</h1>
+      <p>{d.giving.sub}</p>
+    </div>
+  </section>
+  <section class="section tight">
+    <div class="wrap">
+      <div class="give-grid">
+        {funds.map((f) => (
+          <div class="give-card">
+            <h3>{f.title}</h3>
+            <p>{f.text}</p>
+            <a class="btn btn-gold" href={PAYPAL_DONATE_URL} target="_blank" rel="noopener">{d.giving.giveButton}</a>
+          </div>
+        ))}
+      </div>
+      <div class="note" style="margin-top:2rem">
+        {d.giving.note}
+      </div>
+    </div>
+  </section>
+</Base>

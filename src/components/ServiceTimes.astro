@@ -1,0 +1,26 @@
+---
+import { t, SERVICE_TIMES, TIME_LABELS, type Lang } from '../lib/site';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const d = t(lang);
+---
+<div class="times">
+  {SERVICE_TIMES.map((day) => (
+    <div class="time-card">
+      <div class="day">{d.times[day.day as keyof typeof d.times]}</div>
+      <ul>
+        {day.items.map((it) => (
+          <li>
+            <strong>{it.time}</strong><br />
+            {it.label === 'amWorship' || it.label === 'enWorship'
+              ? `${d.times[it.label as 'amWorship' | 'enWorship']} · ${d.times.mainCentre}`
+              : TIME_LABELS[it.label][lang]}
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</div>

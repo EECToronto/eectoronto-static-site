@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import ServiceTimes from '../components/ServiceTimes.astro';
+import { t, lpath, type Lang } from '../lib/site';
+
+const lang: Lang = 'en';
+const d = t(lang);
+const title = `${d.nav.imNew} | ${d.churchName}`;
+const description = 'New to the Ethiopian Evangelical Church in Toronto? Here is what to expect when you visit — service times, location, and what to wear.';
+
+const faqs = [
+  {
+    q: 'What can I expect when I visit?',
+    a: 'A warm welcome. Our Sunday services include vibrant worship in Amharic (10 AM) and English (2 PM), prayer, and teaching from the Word. Greeters at the door will help you find a seat and answer any questions.',
+  },
+  {
+    q: 'When are the services?',
+    a: 'Sundays: 10:00 AM – 1:00 PM Amharic worship and 2:00 – 4:00 PM English worship. We also gather Wednesdays, Fridays, and Saturdays — see the full schedule below.',
+  },
+  {
+    q: 'What should I wear?',
+    a: 'Come as you are. You will see everything from traditional Ethiopian dress to casual clothes.',
+  },
+  {
+    q: 'Where are you located? Is there parking?',
+    a: 'We meet at 2275 Markham Rd, Scarborough, ON M1B 2W3. There is parking available on site, and the building is accessible by TTC.',
+  },
+  {
+    q: 'I don\u2019t speak Amharic. Can I still come?',
+    a: 'Absolutely. Our 2 PM Sunday service is in English, and our Wednesday 5:30 PM discipleship class and Friday prayer are welcoming to English speakers too.',
+  },
+  {
+    q: 'How do I get connected?',
+    a: 'Fill out the New Members form and our team will reach out, or simply introduce yourself to a greeter on Sunday — we would love to meet you.',
+  },
+];
+---
+<Base lang={lang} title={title} description={description} current="imNew">
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href={lpath(lang, '/')}>{d.nav.home}</a> / {d.nav.imNew}</div>
+      <h1>{lang === 'en' ? 'Welcome — we saved you a seat' : 'እንኳን ደህና መጡ'}</h1>
+      <p>{description}</p>
+    </div>
+  </section>
+  <section class="section tight">
+    <div class="wrap">
+      <div class="prose">
+        {faqs.map((f) => (
+          <>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </>
+        ))}
+      </div>
+      <h2 style="margin-top:3rem">{d.home.timesTitle}</h2>
+      <ServiceTimes lang={lang} />
+      <div class="btn-row">
+        <a class="btn btn-gold" href={lpath(lang, '/members')}>{lang === 'en' ? 'Register as a new member' : 'አዲስ አባል ይመዝገቡ'}</a>
+        <a class="btn btn-outline" href={lpath(lang, '/gatherings')}>{d.nav.gatherings}</a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /am/wp-admin/
+Sitemap: https://eectoronto.org/sitemap-index.xml

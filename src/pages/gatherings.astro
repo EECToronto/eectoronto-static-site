@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import ServiceTimes from '../components/ServiceTimes.astro';
+import { t, lpath, type Lang } from '../lib/site';
+
+const lang: Lang = 'en';
+const d = t(lang);
+const title = `${d.nav.gatherings} | ${d.churchName}`;
+const description = 'Weekly service schedule for the Ethiopian Evangelical Church in Toronto — Sundays, Wednesdays, Fridays, and Saturdays at 2275 Markham Rd, Scarborough.';
+---
+<Base lang={lang} title={title} description={description} current="gatherings">
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href={lpath(lang, '/')}>{d.nav.home}</a> / {d.nav.gatherings}</div>
+      <h1>{d.nav.gatherings}</h1>
+      <p>{d.home.timesSub}</p>
+    </div>
+  </section>
+  <section class="section tight">
+    <div class="wrap">
+      <ServiceTimes lang={lang} />
+      <h2 style="margin-top:2.5rem">Where to find us</h2>
+      <p class="lead">{d.footer.address}</p>
+      <div class="map-wrap">
+        <iframe
+          title="Map — Ethiopian Evangelical Church in Toronto"
+          src="https://www.google.com/maps?q=2275+Markham+Rd,+Scarborough,+ON+M1B+2W3&output=embed"
+          loading="lazy"
+        ></iframe>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-gold" href={lpath(lang, '/im-new')}>{d.hero.planVisit}</a>
+      </div>
+    </div>
+  </section>
+</Base>

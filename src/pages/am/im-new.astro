@@ -1,0 +1,64 @@
+---
+import Base from '../../layouts/Base.astro';
+import ServiceTimes from '../../components/ServiceTimes.astro';
+import { t, lpath, type Lang } from '../../lib/site';
+
+const lang: Lang = 'am';
+const d = t(lang);
+const title = `${d.nav.imNew} | ${d.churchName}`;
+const description = 'ለኢትዮጵያ ወንጌላዊት ቤተ ክርስቲያን በቶሮንቶ አዲስ ነዎት? ሲጎበኙን ምን እንደሚጠብቅዎት — የአገልግሎት ሰዓታት፣ አድራሻ እና ልብስ።';
+
+const faqs = [
+  {
+    q: 'ሲጎበኙን ምን ይጠብቃል?',
+    a: 'ሞቅ ያለ አቀባበል። የእሁድ አገልግሎታችን ሕያው የአማርኛ (10 AM) እና የእንግሊዝኛ (2 PM) አምልኮ፣ ጸሎት እና ከቃሉ ትምህርት ያካትታል። በበሩ ላይ ያሉ አቀባበሎች መቀመጫ እንዲያገኙ ይረዱዎታል እና ለማንኛውም ጥያቄ ምላሽ ይሰጣሉ።',
+  },
+  {
+    q: 'አገልግሎቶች መቼ ናቸው?',
+    a: 'እሁድ: 10:00 AM – 1:00 PM የአማርኛ አምልኮ እና 2:00 – 4:00 PM የእንግሊዝኛ አምልኮ። ረቡዕ፣ ዓርብ እና ቅዳሜም እንሰበሰባለን — ሙሉውን ሰዓታት ከታች ይመልከቱ።',
+  },
+  {
+    q: 'ምን ልልበስ?',
+    a: 'እንደሆኑ ይምጡ። ከባህላዊ የኢትዮጵያ ልብስ እስከ ተራ ልብስ ሁሉንም ያያሉ።',
+  },
+  {
+    q: 'የት ናችሁ? የመኪና ማቆሚያ አለ?',
+    a: '2275 Markham Rd, Scarborough, ON M1B 2W3 እንሰበሰባለን። በቦታው ላይ ማቆሚያ አለ፣ ሕንጻውም በቲቲሲ ይደረሳል።',
+  },
+  {
+    q: 'አማርኛ አልናገርም። መምጣት እችላለሁ?',
+    a: 'በእርግጠኝነት። የ2 PM እሁድ አገልግሎታችን በእንግሊዝኛ ነው፣ የረቡዕ 5:30 PM የደቀ መዛሙርት ክፍል እና የዓርብ ጸሎትም የእንግሊዝኛ ተናጋሪዎችን በደስታ ይቀበላሉ።',
+  },
+  {
+    q: 'እንዴት እገናኛለሁ?',
+    a: 'የአዲስ አባላት ቅጽ ይሙሉ እና ቡድናችን ያገኝዎታል፣ ወይም እሁድ ላይ ለአቀባበል ሰው እራስዎን ያስተዋውቁ — ማግኘትዎን እንወዳለን።',
+  },
+];
+---
+<Base lang={lang} title={title} description={description} current="imNew">
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href={lpath(lang, '/')}>{d.nav.home}</a> / {d.nav.imNew}</div>
+      <h1>{lang === 'en' ? 'Welcome — we saved you a seat' : 'እንኳን ደህና መጡ'}</h1>
+      <p>{description}</p>
+    </div>
+  </section>
+  <section class="section tight">
+    <div class="wrap">
+      <div class="prose">
+        {faqs.map((f) => (
+          <>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </>
+        ))}
+      </div>
+      <h2 style="margin-top:3rem">{d.home.timesTitle}</h2>
+      <ServiceTimes lang={lang} />
+      <div class="btn-row">
+        <a class="btn btn-gold" href={lpath(lang, '/members')}>{lang === 'en' ? 'Register as a new member' : 'አዲስ አባል ይመዝገቡ'}</a>
+        <a class="btn btn-outline" href={lpath(lang, '/gatherings')}>{d.nav.gatherings}</a>
+      </div>
+    </div>
+  </section>
+</Base>

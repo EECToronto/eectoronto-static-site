@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import { t, lpath, type Lang } from '../lib/site';
+
+const lang: Lang = 'en';
+const d = t(lang);
+---
+<Base lang={lang} title={`${d.misc.notFoundTitle} | ${d.churchName}`} description={d.misc.notFoundText} current="">
+  <section class="section">
+    <div class="wrap" style="text-align:center; padding: 3rem 0;">
+      <div style="font-size:3.5rem; margin-bottom:1rem">✝</div>
+      <h1>{d.misc.notFoundTitle}</h1>
+      <p class="lead" style="margin:0 auto 2rem">{d.misc.notFoundText}</p>
+      <a class="btn btn-gold" href={lpath(lang, '/')}>{d.misc.backHome}</a>
+    </div>
+  </section>
+</Base>

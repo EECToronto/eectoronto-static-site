@@ -1,0 +1,34 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t, lpath, type Lang } from '../../lib/site';
+import { getCollection } from 'astro:content';
+
+const lang: Lang = 'en';
+const d = t(lang);
+const title = `${d.nav.devotions} | ${d.churchName}`;
+const description = 'Weekly devotions from the Ethiopian Evangelical Church in Toronto — grow in faith through the week.';
+
+const devotions = (await getCollection('devotions', (e) => e.data.lang === lang)).sort((a, b) =>
+  b.data.date.localeCompare(a.data.date)
+);
+---
+<Base lang={lang} title={title} description={description} current="devotions">
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href={lpath(lang, '/')}>{d.nav.home}</a> / {d.nav.devotions}</div>
+      <h1>{d.nav.devotions}</h1>
+      <p>{description}</p>
+    </div>
+  </section>
+  <section class="section tight">
+    <div class="wrap">
+      {devotions.length === 0 && <p class="lead">Devotions are on the way — check back soon.</p>}
+      {devotions.map((post) => (
+        <div class="devotion-item">
+          <div class="meta">{post.data.date}{post.data.category ? ` · ${post.data.category}` : ''}</div>
+          <h3><a href={lpath(lang, `/devotions/${post.slug}`)}>{post.data.title}</a></h3>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>
